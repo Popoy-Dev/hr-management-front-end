@@ -1,0 +1,10 @@
+$primary-color: #64ff00;
+ 
+:export {
+  primaryColor: $primary-color;
+}
+
+  .my-class {
+    color: red ;
+  }
+  
