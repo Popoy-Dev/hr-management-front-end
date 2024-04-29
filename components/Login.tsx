@@ -12,45 +12,27 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import auth from './../app/api/auth'
 import { Alert, InputAdornment, OutlinedInput, TextField } from '@mui/material'
 
-function Login() {
-  const router = useRouter()
+interface LoginProps {
+  title: string
+  setUsername: (username: string) => void
+  setPassword: (password: string) => void
+  handleSubmit: () => void
+  errorMessage: string
+}
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+function Login({
+  title,
+  setUsername,
+  setPassword,
+  handleSubmit,
+  errorMessage,
+}: any) {
   const [showPassword, setShowPassword] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-
-  const handleUsernameChange = (event: any) => {
-    setUsername(event.target.value)
-  }
-
-  const handlePasswordChange = (event: any) => {
-    setPassword(event.target.value)
-  }
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault()
-    const data = {
-      username,
-      password,
-    }
-
-    auth
-      .login(data)
-      .then((res) => {
-        console.log('res', res, res.data.login)
-        if (res.data.login) {
-          router.push('/dashboard')
-        }
-      })
-      .catch((err) => setErrorMessage('Wrong credentials!'))
-
-    console.log('Login attempted:', username, password)
-  }
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -59,18 +41,15 @@ function Login() {
 
   return (
     <div className='flex justify-center items-center  py-12 px-12 bg-blue-100  shadow-2xl rounded-3xl w-1/3	h-auto	'>
-      <form onSubmit={handleSubmit}>
-        <h1 className='flex justify-center font-bold text-2xl'>
-          Employee Login
-        </h1>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <h1 className='flex justify-center font-bold text-2xl'>{title}</h1>
 
         <FormControl fullWidth margin='normal'>
           <TextField
             label='Username'
             id='outlined-start-adornment'
             sx={{ m: 1 }}
-   
-            onChange={handleUsernameChange}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </FormControl>
         <FormControl fullWidth margin='normal'>
@@ -94,7 +73,7 @@ function Login() {
                 </InputAdornment>
               }
               label='Password'
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
         </FormControl>
@@ -111,14 +90,14 @@ function Login() {
         >
           Login
         </Button>
-        <Button
+        {/* <Button
           type='submit'
           variant='outlined'
           color='primary'
           className='mt-2 w-full'
         >
           Signup
-        </Button>
+        </Button> */}
       </form>
     </div>
   )

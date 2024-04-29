@@ -3,14 +3,15 @@
 import React, { useState } from 'react'
 import Login from '@/components/Login'
 import { useRouter } from 'next/navigation'
-import auth from './../app/api/auth'
+import auth from './../../app/api/auth'
 
-export default function Home() {
+function page() {
   const router = useRouter()
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+
   const handleSubmit = (event: any) => {
     event.preventDefault()
     const data = {
@@ -32,15 +33,17 @@ export default function Home() {
   }
   return (
     <main className='w-screen h-screen'>
-      <div className='flex justify-center items-center h-screen'>
-        {/* <Login
-          title='Employee Login'
-          handleSubmit={handleSubmit}
-          setUsername={setUsername}
-          setPassword={setPassword}
-          errorMessage={errorMessage}
-        /> */}
-      </div>
-    </main>
+    <div className='flex justify-center items-center h-screen'>
+      <Login
+        title='HR Login'
+        handleSubmit={handleSubmit}
+        setUsername={setUsername}
+        setPassword={setPassword}
+        errorMessage={errorMessage}
+      />
+    </div>
+  </main>
   )
 }
+
+export default page

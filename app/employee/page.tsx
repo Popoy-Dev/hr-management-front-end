@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Login from '@/components/Login'
 import { useRouter } from 'next/navigation'
-import auth from './../app/api/auth'
+import auth from './../../app/api/auth'
 
 export default function Home() {
   const router = useRouter()
@@ -33,13 +33,13 @@ export default function Home() {
   return (
     <main className='w-screen h-screen'>
       <div className='flex justify-center items-center h-screen'>
-        {/* <Login
+        <Login
           title='Employee Login'
           handleSubmit={handleSubmit}
           setUsername={setUsername}
           setPassword={setPassword}
           errorMessage={errorMessage}
-        /> */}
+        />
       </div>
     </main>
   )

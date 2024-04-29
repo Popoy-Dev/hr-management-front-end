@@ -10,6 +10,8 @@ export default function DashboardLayout({
   // front end handle the userRole by saving the info in localStorage or state (redux/zustand)
   return (
     <section className=''>
+
+      
       <Navbar />
 
       <div className='h-screen flex'>
